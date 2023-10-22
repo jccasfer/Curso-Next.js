@@ -15,6 +15,9 @@ const config: Config = {
       },
     },
   },
-  plugins: [],
+  plugins: [require("daisyui")],    //importar daisy (instalar antes con npm)
+  daisyui: {
+    themes: ["winter"],             //temas de colores de daisy que queremos usar
+  },
 }
 export default config

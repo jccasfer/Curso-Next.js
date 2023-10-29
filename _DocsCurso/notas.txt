@@ -1,0 +1,24 @@
+Estilos 
+
+	/app/global.css
+	vbles globales de la aplicacion.
+
+	Los estilos referentes a elementos de componentes/pages -> CSS Modules
+	Al lado del fichero compo/page con nombre igual pero extension .module.css
+	y luego importarlo en el componente
+
+	import styles from './ProductCart.module.css'
+
+	styles sera un objeto javascript con todas las propiedades definidas. 
+	Por eso no usar nombres con -, usar camelCase (no .card-container -> cardContainer)
+			
+	
+
+routing
+	para tener un parametro, se hace dando nombre a la carpeta:
+	[id]
+	[[id]]		para que sea opcional
+	[[...slug]]	para indicar que recogemos varios
+	dentro del fichero page.tsx se define en Props params
+
+	Query string parameters: En Props searchParams

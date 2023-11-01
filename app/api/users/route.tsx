@@ -4,13 +4,12 @@
 
 import { NextRequest, NextResponse } from "next/server";
 import schema from "./schema";
+import prisma from "@/prisma/client";
 
-export function GET(request: NextRequest) { //request: NextRequest aunque no usemos en este ejemplo la request, al ponerla evitamos que haga caching.
+export async function GET(request: NextRequest) { //request: NextRequest aunque no usemos en este ejemplo la request, al ponerla evitamos que haga caching.
     //recoger datos desde la BD
-    return NextResponse.json([
-        {id: 1, name: 'JC'},
-        {id: 2, name: 'Mosh'}
-    ]);
+    const users = await prisma.user.findMany()
+    return NextResponse.json(users);
 }
 
 export async function POST(request: NextRequest) {
@@ -21,9 +20,19 @@ export async function POST(request: NextRequest) {
     if (!validation.success) //(!body.name)
         return NextResponse.json(validation.error.errors/*{error: 'Name is required'}*/, {status:400});
 
-    return NextResponse.json(
-        {id: 69, name: body.name},   //simulamos generación de id
-        {status: 201}                //created
-    );
+    const user= await prisma.user.findUnique({
+        where: {email: body.email}
+    });
+    if (user)
+        return NextResponse.json({error: 'User already exists'}, {status:400});
+    
+    const newUser= await prisma.user.create({
+        data: { //recoger datos del body y no meter todo el body directamente por si usuario malicioso intenta cambiar otras propiedades
+            name: body.name,
+            email: body.email
+        }
+    });
+
+    return NextResponse.json(newUser, {status: 201} );
 }
 

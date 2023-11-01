@@ -29,6 +29,14 @@ Static Rendering
 		npm start
 
 
+PRISMA ORM:
+	instalar:
+		npm i prisma
+	inicializar:
+		npx prisma init
+		modificar en .env la cadena de conexion (ejemplos https://www.prisma.io/docs/reference/database-reference/connection-urls)
+		y en prisma/schema.prisma el provider SQL que usemos (va con )
+
 
 ------------------------
 

@@ -6,6 +6,15 @@ generator client {
 }
 
 datasource db {
-  provider = "mysql"  //"postgresql"
+  provider = "mysql" //"postgresql"
   url      = env("DATABASE_URL")
+}
+
+model User {
+  id           Int      @id @default(autoincrement())
+  email        String   @unique
+  name         String
+  followers    Int      @default(0)
+  isActive     Boolean  @default(true)
+  registeredAt DateTime @default(now())
 }

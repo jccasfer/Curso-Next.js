@@ -36,6 +36,17 @@ PRISMA ORM:
 		npx prisma init
 		modificar en .env la cadena de conexion (ejemplos https://www.prisma.io/docs/reference/database-reference/connection-urls)
 		y en prisma/schema.prisma el provider SQL que usemos (va con )
+	definir modelos:
+		se definen en schema.prisma
+		usar extension vscode Prisma para tener autocompletado
+		una vez escrito el modelo, para que formatee el codigo bonito, usar;
+			npx prisma format
+	crear y aplicar migration:
+		npx prisma migrate dev (pide darle un nombre)
+		en
+			prisma/migrations/
+		genera carpeta migracion con el nombre y datetimestamp
+		y dentro un fichero sql con la migracion a hacer	
 
 
 ------------------------

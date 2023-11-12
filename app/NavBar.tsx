@@ -13,7 +13,11 @@ const NavBar = () => {
       <Link href="/" className='mr-5'>Next.js</Link>
       <Link href="/users">Users</Link>
       {status === 'loading' && <div className="loading loading-ring"></div>}
-      {status === 'authenticated' && <div>{session.user!.name}</div> /*sabemos que tenemos user ya que arriba si esta loadin devolvemos null =>(marco con ! para que compilador no de error)*/}
+      {status === 'authenticated' &&
+        <div>
+          {session.user!.name /*sabemos que tenemos user ya que arriba si esta loadin devolvemos null =>(marco con ! para que compilador no de error)*/}
+          <Link href="/api/auth/signout" className='ml-3'>Sign Out</Link>
+        </div>}
       {status === 'unauthenticated' && <Link href="/api/auth/signin">Login</Link>}
     </div>
   )

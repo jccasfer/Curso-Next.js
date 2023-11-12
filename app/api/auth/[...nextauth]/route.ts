@@ -1,16 +1,22 @@
 //help para iniciar en https://next-auth.js.org/configuration/initialization#route-handlers-app
 // la carpeta se llama [...nextauth] osea parametro, y recoge todo lo que le llegue como parametro (...)
 
-import NextAuth from "next-auth"
+import NextAuth, { NextAuthOptions } from "next-auth"
 import GoogleProvider from "next-auth/providers/google";
+import { PrismaAdapter } from "@next-auth/prisma-adapter";
+import prisma from "@/prisma/client";
 
 //exportamos el objeto con las propiedades de la auth como una constante a parte para poder usarla desde fuera de este modulo
-export const authOptions = {
+export const authOptions: NextAuthOptions = {
+    adapter: PrismaAdapter(prisma),
     providers: [
         GoogleProvider({
             clientId: process.env.GOOGLE_CLIENT_ID!,           //! al final => si no está, nos marca como erroneo el valor de la vble ya que puede ser undefined, pero nosotros sabes que en el fichero .env está el valor, así que con ! para decirle al compilador typescript que no de error que sabemos que tiene valor
             clientSecret: process.env.GOOGLE_CLIENT_SECRET!
-        })]
+        })],
+    session: {              //by default nuestra estrategia de session es jwt, pero cuando usamos un adapter, cambia la estrategia a database
+        strategy: 'jwt'
+    }
 };
 
 const handler = NextAuth(authOptions);

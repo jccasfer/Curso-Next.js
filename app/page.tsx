@@ -6,6 +6,7 @@ import { getServerSession } from 'next-auth'
 import { authOptions } from './api/auth/[...nextauth]/route'
 
 import leyendas from '@/public/images/Leyendas 2017.jpg'; //imagenes locales:se importa la imagen como un objeto mas, desde carpeta public (se publica)
+import { Metadata } from 'next/types'
 
 /* Usamos Link Component de react para en vez
   de un a href para que no recargue todos los javascripts/fuentes... asociados a la pagina, 
@@ -37,3 +38,16 @@ export default async function Home() {
     </main>
   )
 }
+
+export const metadata: Metadata = {
+  title: 'sobreescribir lo del layout'
+}
+/* para coger los datos de metadata dinamicos. Ej datos de un articulo
+export async function generateMetadata(): Promise<Metadata> {
+  const product = await fetch('')
+  return {
+    title: 'product.title',
+    description: 'product.descrip'
+  }
+}
+*/

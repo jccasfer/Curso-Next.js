@@ -16,8 +16,10 @@ body {
   color: rgb(var(--foreground-rgb));
 }
 
-@layer base { /*Aplicar estilos de tailwind a elementos html*/
+@layer base {
+
+  /*Aplicar estilos de tailwind a elementos html*/
   h1 {
-    @apply font-extrabold text-2xl mb-3
+    @apply font-extrabold text-2xl mb-3 font-poppins;
   }
 }
